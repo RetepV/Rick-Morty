@@ -1,0 +1,113 @@
+Luscii - Rick & Morty - Dev log
+
+16-05
+
+* Received assignment Rick & Morty
+* Check out assignment
+
+	Requirements:
+
+	1) App should show a list of Rick & Morty episodes
+		1.1) List must show all episodes available from the Rick&Morty API
+		1.2) Each episode should show:
+
+			* name
+			* air date
+			* episode code
+
+		1.3) Date must be dd/mm/yyyy format
+		1.4) When user scrolls to end of list (all episodes loaded), show with text
+		     that end of list has been reached.
+		1.5) List entries must be tappable.
+			1.5.1) If a list entry is tapped, show list of all character id's of
+			       the selected episode.
+!!! NOTE: After checking back, show character _names_ instead of _id's_
+			   	1.5.1.1) List entries of character id's must be tappable
+				1.5.1.2) If a list entry of character is tapped, show details page of character.
+		1.6) List content must be refreshable in the background
+		
+
+	2) App should show details page of selected character.
+		2.1) Following information should be shown on details page:
+
+			* image
+			* name
+			* status
+			* species
+			* name of the origin
+			* total number of episodes character appears in
+
+		2.2) Details page should have export function for character details
+			2.2.1) Export function must create file
+				2.2.1.1) Format of file is unspecified -> CSV
+!!! NOTE: A CSV file fulfills the requirements, but we have an image and everything. We could make a PDF, like
+!!! NOTE: a collectible character card. Some research shows that it's not hard at all. -> Stretch goal
+				2.2.1.2) File must be openable by document reader or file explorer
+				2.2.1.3) Following information must be exported to file:
+
+					* name
+					* status
+					* species
+					* name of origin
+					* total number of episodes character appears in
+
+				2.2.1.4) Do the same, but then as PDF, and include the character's image
+	
+	3) App must be written in Swift.
+	4) App must use SwiftUI.
+
+
+Stretch goals:
+
+	1.7) Persistence. -> Let's use Core Data and forget about SwiftData for now.
+	1.8) Pull to refresh
+	1.9) Show timestamp of last refresh, only if persistence is used.
+	2.2.1.4) Make PDF with image and export.
+	5) Unit tests
+	6) UI tests
+
+* Check out Rick&Morty API
+	* Has GraphQL or REST. Let's choose for REST, easier with codable.
+	* Replies are paginated by 20 items.
+		* Calling a 'list' API entry point (no parameters) returns 20 items and an "info" block with total count, total pages, next url and prev url.
+	* There is a Rick-and-Morty-Swift-API
+		* Supports Swift Concurrency.
+		* Does not make use of pagination, just gets all in one go. Is it fine for our cause?
+	
+* Are there free and legal Rick&Morty assets to use, other than the portraits from the API? -> Can't find any.
+
+* Design choices:
+	* Use MVVM.
+	* Use REST and JSON rickandmortyapi.com.
+	* Agile development: all easily extensible, but only strictly necessary functionality.
+	* Don't use Rick-and-Morty-Swift-API, fetches are simple, write my own fetchers.
+	* Avoid other 3rd party libraries as well.
+	* Fetch data in background -> store in Core Data -> update views when CD is being updated. Use @FetchRequest
+ 	  property wrapper where possible.
+	* Use navigation sheets for a more interesting navigation experience than NavigationStack.
+	* Screens:
+		1) Episode List
+		2) Character List
+		3) Character Info
+			* Make CSV and share via ShareLink
+			* Make PDF and share via ShareLink
+	* Add in fun factors
+
+* Goals reached:
+
+1) including all sub goals
+2) including all sub goals
+3)
+4)
+
+* Stretch goals reached:
+
+1.7)
+1.8)
+1.9)
+2.2.1.4)
+5) partially
+
+* Stretch goals failed
+
+6) 

@@ -1,0 +1,21 @@
+//
+//  Attribution.txt
+//  Rick&Morty
+//
+//  Created by Peter de Vroomen on 16-05-2025.
+//
+
+
+
+Font created by Vladimir Carrer.
+Release under Creative Commons Attribution 4.0 International (CC BY 4.0) license.
+https://www.designinspiration.info/wubba-lubba-dub-dub-font/
+
+Downloading of image and caching with URLCache by Mahi Al Jawad
+https://stackoverflow.com/a/77956449/6405218
+
+Rendering a Swift view to a PDF (and share) by Paul Hudson
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-a-swiftui-view-to-a-pdf
+
+Images are all copyrighted by their respective owners, but I have no clue who they are. This
+app may not be published.
