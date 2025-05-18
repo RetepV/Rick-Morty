@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		05919E612DD789310041795E /* Attribution.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05919E602DD7892A0041795E /* Attribution.txt */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		05919D6C2DD76F1D0041795E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -31,7 +27,6 @@
 		05919D592DD76F1B0041795E /* Rick&Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick&Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05919D6B2DD76F1D0041795E /* Rick&MortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick&MortyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05919D752DD76F1D0041795E /* Rick&MortyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick&MortyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		05919E602DD7892A0041795E /* Attribution.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Attribution.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -113,7 +108,6 @@
 		05919D502DD76F1B0041795E = {
 			isa = PBXGroup;
 			children = (
-				05919E602DD7892A0041795E /* Attribution.txt */,
 				05919D5B2DD76F1B0041795E /* Rick&Morty */,
 				05919D6E2DD76F1D0041795E /* Rick&MortyTests */,
 				05919D782DD76F1D0041795E /* Rick&MortyUITests */,
@@ -251,7 +245,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05919E612DD789310041795E /* Attribution.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
