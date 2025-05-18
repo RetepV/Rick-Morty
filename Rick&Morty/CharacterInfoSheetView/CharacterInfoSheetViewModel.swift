@@ -99,7 +99,7 @@ extension CharacterInfoSheetView {
                             Image(uiImage: characterImage)
                                 .resizable()
                                 .scaledToFit()
-                                .padding(EdgeInsets(top: 0, leading: 24, bottom: 64, trailing: 24))
+                                .padding(EdgeInsets(top: 0, leading: 8, bottom: 32, trailing: 8))
                         }
                         
                         ApplicationStyle.Images.photoFrame
@@ -121,7 +121,7 @@ extension CharacterInfoSheetView {
                 }
                 .padding(EdgeInsets(top: 0, leading: 32, bottom: 0, trailing: 32))
             }
-                .frame(width: 800, height: 1600, alignment: .center)
+                .frame(width: 480, height: 1280, alignment: .center)
             )
             
             let url = URL.documentsDirectory.appending(path: "\(character?.name ?? defaultNoCharacterNameName).pdf")
