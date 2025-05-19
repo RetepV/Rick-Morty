@@ -115,7 +115,7 @@ struct Rick_MortyTests {
         }
         #expect(persistenceController != nil)
 
-        let apiEpisodeHandler = APIEpisodeHandler(baseURL: apiBaseURL, persistenceController: persistenceController)
+        let apiEpisodeHandler = APIEpisodeHandler(baseURL: apiBaseURL, persistenceController: persistenceController!)
         
         var episodeInfo: EpisodeListAPIModel?
         
@@ -142,9 +142,15 @@ struct Rick_MortyTests {
     
     @Test func testNextEpisodeAPI() async throws {
         
-        let persistenceController = PersistenceController(inMemory: true)
-        
-        let apiEpisodeHandler = APIEpisodeHandler(baseURL: apiBaseURL, persistenceController: persistenceController)
+        var persistenceController: PersistenceController?
+        await withCheckedContinuation { continuation in
+            persistenceController = PersistenceController(containerName: "Rick_Morty", inMemory: true) {
+                continuation.resume()
+            }
+        }
+        #expect(persistenceController != nil)
+
+        let apiEpisodeHandler = APIEpisodeHandler(baseURL: apiBaseURL, persistenceController: persistenceController!)
         
         var episodeInfo: EpisodeListAPIModel?
         
