@@ -12,6 +12,8 @@ extension Character {
     
     // MARK: - Convenience
     
+    static let entityName: String = "Character"
+    
     enum Attributes: String {
         case id = "id"
         case imageUrl = "imageUrl"
@@ -48,12 +50,13 @@ extension Character {
         self.species = model.species
         self.imageUrl = model.imageUrl
         
-        try self.updateOrigin(model: model.origin)
+        try self.updateOrigin(originModel: model.origin)
+        try self.updateEpisodes(episodeURLStrings: model.episodeUrls)
         
         self.recordState = APIRecordState.upToDate.rawValue
     }
     
-    func updateOrigin(model: CharacterAPIModel.Origin?) throws {
+    func updateOrigin(originModel: CharacterAPIModel.Origin?) throws {
         
         guard let viewContext = self.managedObjectContext else {
             return
@@ -61,12 +64,12 @@ extension Character {
         
         self.origin = nil
         
-        guard let model, let originName = model.name else {
-            // Done, if there is no new origin to set, or the model doesn't even have a name..
+        guard let originModel, let originName = originModel.name else {
+            // Done, if there is no new origin to set, or if the model doesn't even have a name.
             return
         }
         
-        let request = NSFetchRequest<Origin>(entityName: "Origin")
+        let request = NSFetchRequest<Origin>(entityName: Origin.entityName)
         request.predicate = NSPredicate(format: "%K == %@", Origin.Attributes.name.rawValue, originName)
 
         if let existingOriginObject = try viewContext.fetch(request).first {
@@ -75,9 +78,35 @@ extension Character {
         else {
             let newOriginObject = Origin(context: viewContext)
             
-            newOriginObject.update(model: model)
+            newOriginObject.update(model: originModel)
 
             self.origin = newOriginObject
+        }
+    }
+    
+    func updateEpisodes(episodeURLStrings: [String]?) throws {
+        
+        guard let viewContext = self.managedObjectContext else {
+            return
+        }
+        
+        for episodeURLString in episodeURLStrings ?? [] {
+            
+            guard let episodeIDString = episodeURLString.split(separator: "/").last,
+                  let episodeID = Int64(episodeIDString) else {
+                // Probably a malformed URL, just ignore it and continue with the next.
+                continue
+            }
+            
+            let request = NSFetchRequest<Episode>(entityName: Episode.entityName)
+            request.predicate = NSPredicate(format: "%K == %d", Episode.Attributes.id.rawValue, episodeID)
+
+            if let existingEpisodeObject = try viewContext.fetch(request).first {
+                self.addToEpisodes(existingEpisodeObject)
+            }
+            else {
+                // Do nothing.
+            }
         }
     }
 }

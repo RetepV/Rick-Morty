@@ -12,6 +12,8 @@ extension Episode {
     
     // MARK: - Convenience
 
+    static let entityName: String = "Episode"
+
     enum Attributes: String {
         case airDate = "airDate"
         case episodeCode = "episodeCode"
@@ -83,7 +85,7 @@ extension Episode {
             if let characterURL = URL(string: characterURLString),
                let characterID = Int64(characterURL.lastPathComponent) {
                 
-                let request = NSFetchRequest<Character>(entityName: "Character")
+                let request = NSFetchRequest<Character>(entityName: Character.entityName)
                 request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.id.rawValue, characterID)
 
                 if let existingCharacterObject = try viewContext.fetch(request).first {
@@ -93,9 +95,7 @@ extension Episode {
                     let newCharacterObject = Character(context: viewContext)
                     // We don't have the data here. So we add a placeholder and will update it in the background later.
                     newCharacterObject.id = characterID
-                    
                     newCharacterObject.recordState = APIRecordState.placeHolder.rawValue
-
                     self.addToCharacters(newCharacterObject)
                 }
             }

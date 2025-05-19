@@ -11,6 +11,8 @@ extension Origin {
     
     // MARK: - Convenience
     
+    static let entityName: String = "Origin"
+
     enum Attributes: String {
         case name = "name"
         case recordState = "recordState"

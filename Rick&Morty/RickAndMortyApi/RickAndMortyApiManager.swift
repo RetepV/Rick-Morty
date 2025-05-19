@@ -43,7 +43,7 @@ class RickAndMortyApiManager : ObservableObject {
     func updateEpisodeList(completed: @escaping ()->()) {
         
         episodeHandler.updateFullEpisodeList(pageCompleted: {
-            self.characterHandler.updatePlaceholders()
+            
         }, allCompleted: {
             self.characterHandler.updatePlaceholders()
             ApplicationStateStorage.setEpisodesLastUpdated(Date())

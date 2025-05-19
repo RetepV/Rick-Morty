@@ -29,7 +29,7 @@ struct APICharacterPersister {
         
         return try await viewContext.perform {
             
-            let request = NSFetchRequest<Character>(entityName: "Character")
+            let request = NSFetchRequest<Character>(entityName: Character.entityName)
             
             let characters = try viewContext.fetch(request)
             
@@ -48,7 +48,7 @@ struct APICharacterPersister {
         
         return try await viewContext.perform {
             
-            let request = NSFetchRequest<Character>(entityName: "Character")
+            let request = NSFetchRequest<Character>(entityName: Character.entityName)
             request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.recordState.rawValue, state.rawValue)
             
             return try viewContext.fetch(request).compactMap(\.id)
@@ -62,7 +62,7 @@ struct APICharacterPersister {
         
         return try await viewContext.perform {
             
-            let request = NSFetchRequest<Character>(entityName: "Character")
+            let request = NSFetchRequest<Character>(entityName: Character.entityName)
             request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.id.rawValue, id)
             
             let existingCharacterObject = try viewContext.fetch(request).first
@@ -78,7 +78,7 @@ struct APICharacterPersister {
         
         async let _ = try await viewContext.perform {
 
-            let request = NSFetchRequest<Character>(entityName: "Character")
+            let request = NSFetchRequest<Character>(entityName: Character.entityName)
             request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.id.rawValue, characterModel.id)
 
             if let existingCharacterObject = try viewContext.fetch(request).first {

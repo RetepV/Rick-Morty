@@ -10,10 +10,6 @@ import CoreData
 
 struct APIEpisodePersister {
     
-    // MARK: - Constants
-    
-    private let episodeUrlString = "episode"
-
     // MARK: - Private properties
     
     var persistenceController: PersistenceController
@@ -40,7 +36,7 @@ struct APIEpisodePersister {
             
             for episodeModel in episodeModelList {
                 
-                let request = NSFetchRequest<Episode>(entityName: "Episode")
+                let request = NSFetchRequest<Episode>(entityName: Episode.entityName)
                 request.predicate = NSPredicate(format: "%K == %d", Episode.Attributes.id.rawValue, episodeModel.id)
                 
                 if let existingEpisodeObject = try viewContext.fetch(request).first {
