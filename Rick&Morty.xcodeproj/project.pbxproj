@@ -29,42 +29,9 @@
 		05919D752DD76F1D0041795E /* Rick&MortyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick&MortyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		05EFE13D2DDA1BEF0063C02F /* Exceptions for "Rick&Morty" folder in "Rick&MortyTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Persistence/ApplicationStateStorage.swift,
-				Persistence/CachedImageStorage.swift,
-				Persistence/ModelExtensions/Character.swift,
-				Persistence/ModelExtensions/Episode.swift,
-				Persistence/ModelExtensions/Origin.swift,
-				Persistence/PersistenceController.swift,
-				Persistence/PersistencePreviewData.swift,
-				Resources/ApplicationStyle.swift,
-				Resources/Assets.xcassets,
-				Resources/Rick_Morty.xcdatamodeld,
-				RickAndMortyApi/APICharacter/APICharacterFetcher.swift,
-				RickAndMortyApi/APICharacter/APICharacterHandler.swift,
-				RickAndMortyApi/APICharacter/APICharacterPersister.swift,
-				RickAndMortyApi/APIDefinitions.swift,
-				RickAndMortyApi/APIEpisode/APIEpisodeFetcher.swift,
-				RickAndMortyApi/APIEpisode/APIEpisodeHandler.swift,
-				RickAndMortyApi/APIEpisode/APIEpisodePersister.swift,
-				RickAndMortyApi/Models/CharacterAPIModel.swift,
-				RickAndMortyApi/Models/EpisodeAPIModel.swift,
-				RickAndMortyApi/Models/EpisodeListAPIModel.swift,
-				RickAndMortyApi/RickAndMortyApiManager.swift,
-			);
-			target = 05919D6A2DD76F1D0041795E /* Rick&MortyTests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		05919D5B2DD76F1B0041795E /* Rick&Morty */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				05EFE13D2DDA1BEF0063C02F /* Exceptions for "Rick&Morty" folder in "Rick&MortyTests" target */,
-			);
 			path = "Rick&Morty";
 			sourceTree = "<group>";
 		};

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Testing
+import CoreData
 @testable import Rick_Morty
 
 struct Rick_MortyTests {
@@ -83,17 +84,12 @@ struct Rick_MortyTests {
         #expect(characterInfo?.origin?.name == "Earth (C-137)")
         #expect(characterInfo?.episodeUrls?.count == 51)
 
-        // TODO: Can't get these to work for now, getting error.
-        //
-        // error: No NSEntityDescriptions in any model claim the NSManagedObject subclass 'Character' so +entity is confused.  Have you loaded your NSManagedObjectModel yet ?
-        //
-        // Is it because two NSPersistentContainers with the same mom are created when the test target runs? One in Rick_MortyApp and one here.
-        // I guess we have to switch to using mocks, but too much work for now.
-                
-        // Persist in database.
+        // Persist Character in database.
         try await apiCharacterHandler.apiCharacterPersister.persistCharacter(characterModel: #require(characterInfo))
+        
         // Read back from database
-        let characterObject = try await apiCharacterHandler.apiCharacterPersister.fetchCharacterByID(1)
+        let viewContext = persistenceController!.container.viewContext
+        let characterObject = try await apiCharacterHandler.apiCharacterPersister.fetchCharacterByID(viewContext: viewContext, id: 1)
         
         #expect(characterObject?.id == 1)
         #expect(characterObject?.name == "Rick Sanchez")
@@ -101,7 +97,8 @@ struct Rick_MortyTests {
         #expect(characterObject?.species == "Human")
         
         #expect(characterObject?.origin?.name == "Earth (C-137)")
-        #expect(characterObject?.episodes?.count == 51)
+        
+        // NOTE: We did not download any episodes. So the number of episodeUrls will be 0, and there is no sense in testing that.
     }
 
     

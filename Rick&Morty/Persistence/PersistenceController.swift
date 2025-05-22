@@ -82,3 +82,32 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+// NOTE: This extension is here to help disambiguate entities for Unit Tests. Without this extension, we will have the
+//       following warnings when running Unit Tests, and also might have crashes in the tests because Core Data might
+//       cast to the wrong entity class.
+//
+//       CoreData: warning: Multiple NSEntityDescriptions claim the NSManagedObject subclass 'Character' so +entity is unable to disambiguate.
+//       CoreData: warning: Multiple NSEntityDescriptions claim the NSManagedObject subclass 'Character' so +entity is unable to disambiguate.
+//       CoreData: warning:       'Character' (0x600003508160) from NSManagedObjectModel (0x6000021006e0) claims 'Character'.
+//       CoreData: warning:       'Character' (0x600003508160) from NSManagedObjectModel (0x6000021006e0) claims 'Character'.
+//       CoreData: warning:       'Character' (0x600003526d60) from NSManagedObjectModel (0x60000213d1d0) claims 'Character'.
+//       CoreData: warning:       'Character' (0x600003526d60) from NSManagedObjectModel (0x60000213d1d0) claims 'Character'.
+//
+//       The reason is that when running Unit Tests, Xcode runs the app and the tests together. The app creates an instance of PersistenceController,
+//       like usual. But in the Unit Tests, we create another instance of PersistenceControllerpersistent, except in-memory. They both use the same
+//       object model, and this is confusing Core Data when trying to resolve entity descriptions.
+//       A solution is to create a convenience initialiser for NSManagedObjectContext that specifically points to its provided NSManagedObjectContext
+//       as the provider of the entity description.
+//       This workaround works for the normal case and for Unit Tests, so we do not have to make a specific exceptions for the unit test. But do
+//       understand that this is only necessary for working around the ambiguity issue when we run Unit Tests.
+
+public extension NSManagedObject {
+
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
+
+}

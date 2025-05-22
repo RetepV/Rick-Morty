@@ -105,7 +105,13 @@ extension Character {
                 self.addToEpisodes(existingEpisodeObject)
             }
             else {
-                // Do nothing.
+                // Do nothing. The Episode is not in the database (yet). We could choose to fetch the episode now,
+                // but that will make for complex code, as we have to check if we need to resolve for other Character
+                // entities as well.
+                // Instead of that complex code, we make sure to download all Episode entities first, and only then
+                // download the Characters. So all should be resolved (unless a Character references an Episode that
+                // does not exist in the remote). As we update from the remote regularly, anything missing will be
+                // resolved in a future update anyway.
             }
         }
     }

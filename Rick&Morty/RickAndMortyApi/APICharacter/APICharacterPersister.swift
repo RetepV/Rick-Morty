@@ -56,19 +56,15 @@ struct APICharacterPersister {
     }
     
     @MainActor
-    func fetchCharacterByID(_ id: Int64) async throws -> Character? {
+    func fetchCharacterByID(viewContext: NSManagedObjectContext, id: Int64) async throws -> Character? {
         
-        let viewContext = persistenceController.container.newBackgroundContext()
+        let request = NSFetchRequest<Character>(entityName: Character.entityName)
+        request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.id.rawValue, id)
+        request.returnsObjectsAsFaults = false
         
-        return try await viewContext.perform {
-            
-            let request = NSFetchRequest<Character>(entityName: Character.entityName)
-            request.predicate = NSPredicate(format: "%K == %d", Character.Attributes.id.rawValue, id)
-            
-            let existingCharacterObject = try viewContext.fetch(request).first
+        let existingCharacterObject = try viewContext.fetch(request).first
 
-            return existingCharacterObject
-        }
+        return existingCharacterObject
     }
         
     @MainActor
